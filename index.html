@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        :root {
+            box-sizing: border-box;
+        }
+
+        *, ::before, ::after {
+            box-sizing: inherit;
+        }
+
+        body {
+            background-color: aquamarine;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        p {
+            columns: 2;
+        }
+
+        .card {
+            padding: .5em;
+            max-width: 25em;
+            background-color: aliceblue;
+            margin-right: 10px;
+            box-shadow: 5px 10px 25px -16px;
+        }
+
+        .card img {
+            max-width: 100%;
+        }
+
+        .prova {
+            width: 600px;
+            height: 300px;
+            background-color: aliceblue;
+            margin-top: 200px;
+            border-radius: 20px;
+            filter: blur(3px);
+            opacity: 70%;
+        }
+        /*.con{*/
+        /*    background-color: blue;*/
+        /*}*/
+
+        /*transform*/
+        .container .card:hover {
+            animation-name: animazione;
+            animation-duration: 2s;
+        }
+
+
+        @keyframes animazione {
+            0% {
+                transform: rotate(0deg) translateY(0px) scale(1, 1);
+            }
+
+            25% {
+                transform: rotate(-10deg) translateY(-20px) scale(1.2, 1.2);
+            }
+
+            75% {
+                transform: rotate(10deg) translateY(20px) scale(1.2, 1.2);
+            }
+
+            100% {
+                transform: rotate(0deg) translateY(0px) scale(1, 1);
+            }
+
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <img src="4.jpeg" alt="img">
+        <h4>Descrizione</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Molestie at
+            elementum eu facilisis. Eget mauris pharetra et ultrices neque. Hac habitasse platea dictumst vestibulum
+            rhoncus. Massa enim nec dui nunc mattis. Mattis aliquam faucibus purus in massa tempor nec. Tortor at auctor
+            urna nunc id cursus metus. Facilisi morbi tempus iaculis urna id volutpat. Bibendum neque egestas congue
+            quisque. Feugiat in ante metus dictum. Sit amet est placerat in egestas erat.</p>
+    </div>
+
+    <div class="card">
+        <img src="4.jpeg" alt="img">
+        <h4>Descrizione</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Molestie at
+            elementum eu facilisis. Eget mauris pharetra et ultrices neque. Hac habitasse platea dictumst vestibulum
+            rhoncus. Massa enim nec dui nunc mattis. Mattis aliquam faucibus purus in massa tempor nec. Tortor at auctor
+            urna nunc id cursus metus. Facilisi morbi tempus iaculis urna id volutpat. Bibendum neque egestas congue
+            quisque. Feugiat in ante metus dictum. Sit amet est placerat in egestas erat.</p>
+    </div>
+
+    <div class="card">
+        <img src="4.jpeg" alt="img">
+        <h4>Descrizione</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Molestie at
+            elementum eu facilisis. Eget mauris pharetra et ultrices neque. Hac habitasse platea dictumst vestibulum
+            rhoncus. Massa enim nec dui nunc mattis. Mattis aliquam faucibus purus in massa tempor nec. Tortor at auctor
+            urna nunc id cursus metus. Facilisi morbi tempus iaculis urna id volutpat. Bibendum neque egestas congue
+            quisque. Feugiat in ante metus dictum. Sit amet est placerat in egestas erat.</p>
+    </div>
+
+
+</div>
+<div class="con"><div class="prova"></div></div>
+</body>
+</html>
