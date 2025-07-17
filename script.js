@@ -1,25 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. SETUP FIREBASE ---
-    // IMPORTANTE: Incolla qui il tuo oggetto di configurazione di Firebase
-    // che hai ottenuto dalla console del tuo progetto.
+    // Configurazione di Firebase con le tue chiavi
     const firebaseConfig = {
-        apiKey: "TUO_API_KEY",
-        authDomain: "TUO_AUTH_DOMAIN",
-        projectId: "TUO_PROJECT_ID",
-        storageBucket: "TUO_STORAGE_BUCKET",
-        messagingSenderId: "TUO_MESSAGING_SENDER_ID",
-        appId: "TUO_APP_ID"
+      apiKey: "AIzaSyCuXX5CEkan_lpgAuHVDtAZa0TJSoUpDNQ",
+      authDomain: "todo-9773a.firebaseapp.com",
+      projectId: "todo-9773a",
+      storageBucket: "todo-9773a.appspot.com",
+      messagingSenderId: "612007292453",
+      appId: "1:612007292453:web:b92b4727a4d1665bec59cc",
+      measurementId: "G-J8X9ZQBVWP"
     };
 
-    // Inizializzazione di Firebase
+    // Inizializzazione di Firebase (Metodo Compatibile)
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
     // --- 2. STATO GLOBALE ---
-    let currentUser = null; // Conterrà l'utente di Firebase Auth
-    let userProfile = null; // Conterrà i dati dell'utente da Firestore (es. nome)
+    let currentUser = null; 
+    let userProfile = null; 
 
     // --- 3. RIFERIMENTI AL DOM ---
     const views = {
@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function updateUI() {
         if (currentUser) {
-            // Se l'utente è loggato, carica il suo profilo da Firestore
             const userDoc = await db.collection('users').doc(currentUser.uid).get();
             if (userDoc.exists) {
                 userProfile = userDoc.data();
@@ -89,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         views.dashboard.innerHTML = `<header class="view-header"><button class="back-btn" data-target="home"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button><h1>${categoryName}</h1></header><p>Caricamento...</p>`;
         navigateTo('dashboard');
         
-        // CONVERSIONE: da Supabase a Firestore
         const lists = [];
         try {
             const querySnapshot = await db.collection('lists')
@@ -101,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } catch (error) {
             console.error("Errore nel caricare le liste: ", error);
-            alert("Impossibile caricare le liste.");
+            alert("Impossibile caricare le liste. Controlla le regole di sicurezza di Firestore.");
             return;
         }
 
@@ -120,16 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!listName) return;
 
         try {
-            // CONVERSIONE: da Supabase a Firestore
-            const newListRef = await db.collection('lists').add({
+            await db.collection('lists').add({
                 name: listName,
                 ownerId: currentUser.uid,
                 categoryId: categoryId,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-            // Nella logica originale c'era una tabella `list_members`.
-            // Per ora, la proprietà `ownerId` è sufficiente.
-            // Se servisse condividere le liste, si potrebbe aggiungere una collection `list_members`.
             await renderDashboard(categoryName, categoryId);
         } catch (error) {
             console.error("Errore creazione lista: ", error);
@@ -168,18 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputs = Object.fromEntries(new FormData(form));
 
         if (form.id === 'login-form') {
-            // CONVERSIONE: Login con Firebase
             try {
                 await auth.signInWithEmailAndPassword(inputs.email, inputs.password);
-                // L'onAuthStateChange gestirà la navigazione
             } catch (error) {
                 alert(error.message);
             }
         } else if (form.id === 'register-form') {
-            // CONVERSIONE: Registrazione con Firebase
             try {
                 const userCredential = await auth.createUserWithEmailAndPassword(inputs.email, inputs.password);
-                // Dopo aver creato l'utente, salvo i dati extra (nome, cognome) in Firestore
                 await db.collection('users').doc(userCredential.user.uid).set({
                     firstName: inputs.nome,
                     lastName: inputs.cognome,
@@ -194,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 6. PUNTO DI INGRESSO ---
-    // CONVERSIONE: da Supabase a Firebase
     auth.onAuthStateChanged(user => {
         currentUser = user;
         updateUI();
