@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App con Firebase</title>
+    <title>Todo App Collaborativa</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Aggiunto Font Awesome per le icone -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- SDK di Firebase -->
@@ -17,22 +15,27 @@
 </head>
 <body>
 
-    <div id="splash-view" class="view active">
-        <div class="splash-content">
-            <img src="https://i.imgur.com/gIunJ6E.png" alt="Logo TodoApp" class="logo-img">
-            <div class="splash-actions">
-                <button id="splash-login-btn" class="splash-btn">Login</button>
-                <button id="splash-register-btn" class="splash-btn secondary">Registrati</button>
-            </div>
-        </div>
-    </div>
-    
+    <!-- Viste principali dell'applicazione -->
+    <div id="splash-view" class="view active"></div>
     <div id="home-view" class="view"></div>
     <div id="list-dashboard-view" class="view"></div>
     <div id="task-view" class="view"></div>
     <div id="profile-view" class="view"></div>
     <div id="login-view" class="view"></div>
     <div id="register-view" class="view"></div>
+
+    <!-- Modale per la condivisione delle liste -->
+    <div id="share-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h2>Condividi Lista</h2>
+            <p>Seleziona gli amici con cui condividere questa lista.</p>
+            <div id="friends-list-container">
+                <!-- L'elenco degli amici verrà inserito qui dal JS -->
+            </div>
+            <button id="confirm-share-btn" class="form-btn">Salva Condivisioni</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
