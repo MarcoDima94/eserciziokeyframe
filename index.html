@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App Collaborativa</title>
+
+    <!-- Link PWA e Stile -->
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Colore della barra del browser -->
+    <meta name="theme-color" content="#004a5a">
+
+    <!-- Icone per dispositivi Apple -->
+    <link rel="apple-touch-icon" href="https://placehold.co/192x192/012a36/1ee3cf?text=Todo">
+
+    <!-- Font e Icone esterne -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -20,7 +31,6 @@
     <div id="home-view" class="view"></div>
     <div id="list-dashboard-view" class="view"></div>
     <div id="task-view" class="view"></div>
-    <!-- NUOVA VISTA PER GLI EVENTI DI UNA LISTA -->
     <div id="event-view" class="view"></div>
     <div id="profile-view" class="view"></div>
     <div id="login-view" class="view"></div>
@@ -41,5 +51,20 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Script per registrare il Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('Service Worker registrato con successo:', registration.scope);
+            })
+            .catch(error => {
+              console.log('Registrazione Service Worker fallita:', error);
+            });
+        });
+      }
+    </script>
 </body>
 </html>
